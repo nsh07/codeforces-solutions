@@ -7,6 +7,17 @@
 
 using namespace std;
 
+template <typename T>
+T rpow(T a, T b) {
+    if (b == 1) return a;
+    if (b == 0) return 1;
+
+    if (b % 2 == 0)
+        return rpow(a, b / 2) * rpow(a, b / 2);
+    else
+        return rpow(a, b / 2 + 1) * rpow(a, b / 2);
+}
+
 template <typename T1, typename T2>
 void inputVector(T1 n, vector<T2> &a) {
     for (T1 i = 0; i < n; i++) {

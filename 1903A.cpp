@@ -2,9 +2,7 @@
 //  Created by Nishant Mishra <https://github.com/nsh07>
 //
 
-#include <algorithm>
 #include <iostream>
-#include <numeric>
 #include <vector>
 
 using namespace std;
@@ -32,18 +30,32 @@ int main() {
     cin.tie(0);
     cout.tie(0);
 
-    int n;
-    cin >> n;
-    vector<int> a(n);
-    inputVector(n, a);
-    sort(a.begin(), a.end(), greater<int>());
+    int t;
+    cin >> t;
 
-    int req = accumulate(a.begin(), a.end(), 0) / 2 + 1, sum = 0, count = 0;
+    while (t--) {
+        int n, k;
+        cin >> n >> k;
 
-    while (sum < req) {
-        sum += a[count];
-        count++;
+        vector<int> nums(n);
+
+        for (int i = 0; i < n; i++) {
+            cin >> nums[i];
+        }
+
+        if (k > 1) {
+            cout << "YES\n";
+        } else {
+            int possible = true;
+
+            for (int i = 1; i < n; i++) {
+                if (nums[i] - nums[i - 1] < 0) {
+                    possible = false;
+                    break;
+                }
+            }
+
+            possible ? cout << "YES\n" : cout << "NO\n";
+        }
     }
-
-    cout << count << '\n';
 }

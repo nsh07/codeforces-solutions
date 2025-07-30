@@ -3,8 +3,8 @@
 //
 
 #include <algorithm>
+#include <climits>
 #include <iostream>
-#include <numeric>
 #include <vector>
 
 using namespace std;
@@ -32,18 +32,29 @@ int main() {
     cin.tie(0);
     cout.tie(0);
 
-    int n;
-    cin >> n;
-    vector<int> a(n);
-    inputVector(n, a);
-    sort(a.begin(), a.end(), greater<int>());
+    int t;
+    cin >> t;
 
-    int req = accumulate(a.begin(), a.end(), 0) / 2 + 1, sum = 0, count = 0;
+    while (t--) {
+        int n, x;
+        cin >> n >> x;
 
-    while (sum < req) {
-        sum += a[count];
-        count++;
+        vector<int> fuels(n);
+
+        for (int i = 0; i < n; i++) {
+            cin >> fuels[i];
+        }
+
+        int maxDist = INT_MIN;
+
+        maxDist = max(maxDist, fuels[0]);
+
+        for (int i = 1; i < n; i++) {
+            maxDist = max(maxDist, fuels[i] - fuels[i - 1]);
+        }
+
+        maxDist = max(maxDist, (x - fuels[n - 1]) * 2);
+
+        cout << maxDist << '\n';
     }
-
-    cout << count << '\n';
 }

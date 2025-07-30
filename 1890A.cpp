@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <map>
 #include <vector>
 
 using namespace std;
@@ -34,5 +35,27 @@ int main() {
     cin >> t;
 
     while (t--) {
+        int n;
+        cin >> n;
+
+        vector<int> a(n);
+        inputVector(n, a);
+
+        map<int, int> counts;
+        for (auto num : a) {
+            counts[num]++;
+        }
+
+        if (counts.size() > 2)
+            cout << "No\n";
+        else {
+            if (counts.size() == 1)
+                cout << "Yes\n";
+            else if (abs(counts.begin()->second - (++counts.begin())->second) >
+                     1)
+                cout << "No\n";
+            else
+                cout << "Yes\n";
+        }
     }
 }
